@@ -19,7 +19,7 @@ namespace RpcLite {
         virtual void stop() = 0;
 
         virtual bool waitForData(int threadIndex, int& clientSocket, std::string& data) = 0;
-        virtual void send(int clientSocket, const std::string& data) = 0;
+        virtual int send(int clientSocket, const std::string& data) = 0;
     };
 
     std::unique_ptr<IServer> createServer(int port, int threadCount);

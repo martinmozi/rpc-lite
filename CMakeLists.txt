@@ -4,11 +4,6 @@ project("rpc-lite" VERSION 1.0.0)
 find_package(Threads REQUIRED)
 include(CMakePackageConfigHelpers)
 
-if(WIN32)
-   set(Sock_libs ws2_32 IPHLPAPI)
-   add_definitions(-DWIN32)
-endif()
-
 add_compile_options($<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:-Wall>
                     $<$<CXX_COMPILER_ID:MSVC>:/W3>)
                     

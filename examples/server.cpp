@@ -3,6 +3,9 @@
 #include <chrono>
 #include <thread>
 #include "../lib/IServer.h"
+#ifdef WIN32
+    #include <winsock2.h>
+#endif
 
 class Worker : public RpcLite::IWorker {
 public:
@@ -24,9 +27,17 @@ public:
 };
 
 int main() {
+#ifdef WIN32
+    WSADATA wsaData;
+    ::WSAStartup(MAKEWORD(2, 2), &wsaData);
+#endif
     const int port = 10002;
     const int threadCount = 4;
     auto iServer = RpcLite::createServer(port, threadCount);
     iServer->run(std::move(Worker()));
+
+#ifdef WIN32
+    ::WSACleanup();
+#endif
     return 0;
 }

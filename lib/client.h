@@ -14,6 +14,9 @@ namespace RpcLite {
         virtual void disconnect();
 
     private:
+        bool receive(std::string& data);
+
+    private:
         int _port;
         int _timeoutMs;
         SOCKET _sock;

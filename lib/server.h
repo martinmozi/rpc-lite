@@ -14,7 +14,7 @@ namespace RpcLite {
         virtual void stop();
 
         virtual bool waitForData(int threadIndex, int& clientSocket, std::string& data);
-        virtual void send(int clientSocket, const std::string& data);
+        virtual int send(int clientSocket, const std::string& data);
 
     private:
         int _port;

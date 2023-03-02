@@ -1,5 +1,6 @@
 #include "os.h"
 #ifdef WIN32
+    #include "wepoll/wepoll.h"
 #else
     #include <unistd.h>
     #include <fcntl.h>
@@ -22,5 +23,13 @@ void Os::close_socket(SOCKET socket) {
     ::closesocket(socket);
 #else
     ::close(socket);
+#endif
+}
+
+void Os::close_epoll(HANDLE handle) {
+#ifdef WIN32
+    ::epoll_close(handle);
+#else
+    ::close(handle);
 #endif
 }
